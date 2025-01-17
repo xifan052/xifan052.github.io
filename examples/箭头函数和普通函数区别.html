@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>右键点击查看网页源代码，查看相应代码</p>
+    <script>
+        const obj = {
+            getThis: () => {
+                return this
+            },
+            getArguments: () => {
+                return arguments
+            }
+        }
+        const obj1 = {
+            getThis: function () {
+                return this
+            },
+            getArguments: function () {
+                return arguments
+            }
+        }
+
+        // 1. this 指向：箭头函数没有自己的this值，它会继承外层作用域的this值。而普通函数中的this值是在运行时确定的，根据调用方式的不同而有所变化。
+        
+        // console.log(obj.getThis()) // 输出window对象
+        // console.log(obj1.getThis()) // 输出当前对象
+
+        // 2. arguments 对象：箭头函数没有自己的arguments对象。在箭头函数中使用arguments会引用外层函数的arguments对象。
+
+        // console.log(obj.getArguments("参数")) // 报错ReferenceError: arguments is not defined
+        // console.log(obj1.getArguments("参数")) // 输出Arguments ['参数', callee: ƒ, Symbol(Symbol.iterator): ƒ]
+        
+        // 3. 构造函数：箭头函数不能用作构造函数，不能使用new关键字实例化对象(因为没有this)。普通函数可以用作构造函数，创建新的对象实例。
+
+
+    </script>
+</body>
+
+</html>

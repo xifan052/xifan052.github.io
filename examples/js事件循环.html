@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+        // const timeout = 0
+        // console.log(1)
+
+        // setTimeout(() => {
+        //     console.log(2)
+        // }, timeout)
+
+        // new Promise((resolve) => {
+        //     console.log(3)
+        //     setTimeout(resolve, timeout)
+        // }).then(() => {
+        //     console.log(4)
+        // })
+
+        // requestAnimationFrame(_ => console.log(5))
+        // console.log(6)
+
+        // 输出顺序，为什么？
+    </script>
+    <script>
+
+        /**
+         * 
+         * 同步（Promise）>
+         * 异步（微任务（process.nextTick ，Promises.then, Promise.catch ，resove,reject,MutationObserver) >
+         * 宏任务（setTimeout，setInterval，setImmediate））
+        */
+        // new Promise((resolve, reject) => {
+        //     console.log(1)
+        //     resolve()
+        // }).then(() => {
+        //     console.log(2)
+        //     new Promise((resolve, reject) => {
+        //         console.log(3)
+        //         resolve()
+        //     }).then(() => {
+        //         console.log(4)
+        //     }).then(() => {
+        //         console.log(5)
+        //     })
+        // }).then(() => {
+        //     console.log(6)
+        // })
+
+
+        // 1,
+        //     2,
+        //     3,
+        //     4,
+        //     6,
+        //     5
+
+
+        // function test() {
+        //     console.log('start')
+
+        //     setTimeout(() => {
+        //         console.log('children2')
+        //         Promise.resolve().then(() => { console.log('children2-1') })
+        //     }, 0)
+
+        //     setTimeout(() => {
+        //         console.log('children3')
+        //         Promise.resolve().then(() => { console.log('children3-1') })
+        //     }, 0)
+
+        //     Promise.resolve().then(() => { console.log('children1') })
+        //     console.log('end')
+        // }
+        // test()
+
+
+        // console.log("==============")
+        // function a1() {
+        //     new Promise((resolve, reject) => {
+        //         console.log(1)
+        //         for (let i = 0; i < 9999; i++) {
+        //             if (i === 9000) {
+        //                 resolve(i)
+        //             }
+
+        //         }
+        //         console.log(33)
+        //     }).then(res => {
+        //         console.log(res)
+        //     })
+        //     console.log(222222)
+        // }
+        // a1()
+        // console.log("==============")
+
+        console.log(1)
+        setTimeout(() => {
+            console.log(2)
+            Promise.resolve().then(() => {
+                console.log(3)
+            })
+            setTimeout(() => {
+             console.log(222222222222)   
+            });
+        });
+
+        new Promise((resolve, reject) => {
+            console.log(4)
+            resolve(5)
+        }).then(data => {
+            console.log(data)
+        })
+
+        setTimeout(() => {
+            console.log(6)
+        });
+        console.log(7)
+
+
+ /**
+    首先，执行 console.log(1)，输出 1。
+    然后，执行 setTimeout，它会将回调函数放入事件队列中等待，此时不会立即执行，继续执行下面的代码。
+    执行 new Promise，立即执行其执行函数，输出 4。然后，由于 resolve(5) 是同步操作，因此会立即执行 then 方法的回调函数，输出 5。
+    执行 setTimeout，同样将其回调函数放入事件队列中等待。
+    执行 console.log(7)，输出 7。
+    至此，同步任务执行完毕，开始执行异步任务。事件循环从事件队列中取出任务执行。
+    首先执行第一个 setTimeout 的回调函数，输出 2。
+    然后，在这个回调函数中，执行 Promise.resolve().then()，这是一个微任务，会在当前宏任务执行完毕后立即执行。所以，输出 3。
+    接着执行第二个 setTimeout 的回调函数，输出 6。
+    因此，最终输出的顺序是 1 4 7 5 2 3 6。 
+  * 
+ */
+    </script>
+
+</body>
+
+</html>

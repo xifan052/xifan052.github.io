@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            box-sizing: border-box;
+        }
+
+        .flow-root {
+            display: flow-root;
+        }
+
+        .overflow-hidden {
+            overflow: hidden;
+        }
+
+        .grid {
+            display: grid;
+        }
+
+        .row {
+            position: relative;
+            width: 300px;
+        }
+
+        .row button {
+            position: absolute;
+            right: -60px;
+            top: 0;
+        }
+
+        .wrap {
+            padding: 10px;
+            background-color: pink;
+        }
+
+        .box {
+            width: 70px;
+            line-height: 50px;
+            background-color: aliceblue;
+            text-align: center;
+        }
+
+        .wrap .box {
+            float: left;
+            line-height: 50px;
+            background-color: aliceblue;
+        }
+
+
+        .wrap1 {
+            padding: 10px;
+            background-color: pink;
+        }
+
+        .wrap1 .box {
+            margin: 10px;
+        }
+
+        .wrap1.table-caption>.box {
+            display: table-caption;
+        }
+
+        .wrap2 {
+            padding: 10px;
+            background-color: pink;
+        }
+
+        .wrap2 .box {
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    BFC是一种排列html的规则
+    <!-- BFC触发方式 -->
+
+
+    <h3>容器内部元素设置浮动，会出现父容器高度塌陷；</h3>
+    <p>1.设置父容器overflow值不为none，即hidden、auto、scroll；</p>
+    <div class="row">
+        <div class="wrap overflow-hidden">
+            <div class="box">内部块</div>
+            <!-- <div style="display: inline-block;">
+                填充文字1填充文字2填充文字3填充文字4填充文字5填充文字6
+            </div> -->
+        </div>
+        <button onclick="revert('overflow-hidden',this)">还原</button>
+    </div>
+    <p>2.设置父容器display值为flow-root</p>
+    <div class="row">
+        <div class="wrap flow-root">
+            <div class="box">内部块</div>
+        </div>
+        <button onclick="revert('flow-root',this)">还原</button>
+    </div>
+
+    <hr />
+    <h3>margin重叠；</h3>
+    <p>1.设置元素的display为inline、inline-*或table-caption ；</p>
+    <div class="row">
+        <div class="wrap1 table-caption">
+            <div class="box">内部块</div>
+            <div class="box">内部块</div>
+        </div>
+        <button onclick="revert('table-caption',this)">还原</button>
+    </div>
+    <p>2.设置容器的display为grid或flex；</p>
+    <div class="row">
+        <div class="wrap2 grid">
+            <div class="box">内部块</div>
+            <div class="box">内部块</div>
+        </div>
+        <button onclick="revert('grid',this)">还原</button>
+    </div>
+    <script>
+        function revert(className, el) {
+            const prevClassList = el.previousElementSibling.classList
+            const prevClassArr = Array.from(prevClassList)
+
+            // if
+            el.previousElementSibling.classList.toggle(className)
+        }
+
+
+
+    </script>
+</body>
+
+</html>

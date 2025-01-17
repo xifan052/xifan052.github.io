@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        // /防抖是指在事件被触发后，等待一定时间间隔，如果在这个时间间隔内没有再次触发该事件，则执行相应操作。如果在这个时间间隔内再次触发了事件，则重新等待一定时间。
+        function debounce(func, delay) {
+            let timer;
+            return function (...args) {
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    func.apply(this, args);
+                }, delay);
+            };
+        }
+
+        // 示例用法
+        function handleInput() {
+            console.log('Input event debounced');
+        }
+
+        const debouncedHandleInput = debounce(function () {
+            console.log('Input event debounced');
+        }, 300);
+
+        // 监听输入框的输入事件，并进行防抖处理
+        // document.addEventListener("mousemove", debouncedHandleInput);
+
+
+        // 节流是指在一定时间间隔内只触发一次事件，即使这段时间内触发了多次。它可以用于限制事件处理函数的执行频率。
+
+        function throttle(func, limit) {
+            let inThrottle;
+            return function (...args) {
+                if (!inThrottle) {
+                    func.apply(this, args);
+                    inThrottle = true;
+                    setTimeout(() => inThrottle = false, limit);
+                }
+            };
+        }
+
+        // 示例用法
+        function handleScroll() {
+            console.log('Scroll event throttled');
+        }
+
+        const throttledHandleScroll = throttle(handleScroll, 100);
+
+        // 监听滚动事件，并进行节流处理
+        window.addEventListener('scroll', throttledHandleScroll);
+    </script>
+</body>
+
+</html>

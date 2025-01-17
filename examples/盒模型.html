@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+        }
+
+        body {
+            padding-left: 20px;
+        }
+
+        .box,
+        .box1 {
+            width: 100px;
+            height: 100px;
+            padding: 20px;
+            margin: 20px;
+            border: 2px solid;
+            text-align: center;
+            background-color: pink;
+        }
+
+        .box {
+            box-sizing: border-box;
+        }
+
+        .demo {
+            width:200px;
+            /* width: 20vw;
+            height: 20vw; */
+            background-color: red;
+            aspect-ratio: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="demo"></div>
+
+    <div class="box">
+        怪异盒模型
+    </div>
+    元素最终宽度 = content大小(100px)
+
+    <div class="box1">
+        标准盒模型
+    </div>
+    元素最终宽度 = border(4px) + padding(40px) + content大小(100px)
+</body>
+
+</html>
