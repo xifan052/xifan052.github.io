@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            text-align: center;
+        }
+
+        div {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+        }
+
+        .box-1 {
+            background-color: pink;
+            width: 15vw;
+            height: 15vw;
+        }
+
+        .box-2 {
+            width: 15vw;
+            aspect-ratio: 1;
+            background-color: hotpink;
+            vertical-align: top;
+        }
+
+        .box-3 {
+            width: 15vw;
+            aspect-ratio: 1/2;
+            background-color: rgb(137, 203, 137);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box-1">宽高都设置相同的vw单位</div>
+    <hr>
+    <div class="box-2">aspect-ratio: 1</div>
+
+    <div class="box-3">aspect-ratio还可以设置比例 1/2</div>
+</body>
+
+</html>
